@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback board</title>
+  <style>
+    :root { --ink: #1c2733; --muted: #5d6b78; --line: #dde4ea; --accent: #2d6cdf; --paper: #f5f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--paper); }
+    main { max-width: 640px; margin: 0 auto; padding: 40px 20px; }
+    h1 { margin: 0 0 6px; }
+    .lead { color: var(--muted); margin: 0 0 24px; }
+    form, .note { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+    form { display: grid; gap: 10px; margin-bottom: 24px; }
+    input, textarea { font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; }
+    textarea { min-height: 90px; resize: vertical; }
+    button { font: inherit; font-weight: 600; border: 0; border-radius: 10px; padding: 10px 16px; background: var(--accent); color: #fff; cursor: pointer; justify-self: start; }
+    .notes { display: grid; gap: 12px; }
+    .note p { margin: 0 0 8px; white-space: pre-wrap; }
+    .note small { color: var(--muted); }
+    .error { color: #b42318; min-height: 1.2em; margin: 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Feedback board</h1>
+    <p class="lead">Leave a note. It's saved on the server, so everyone sees it.</p>
+    <form id="noteForm">
+      <input name="name" maxlength="60" placeholder="Your name (optional)" aria-label="Your name">
+      <textarea name="text" maxlength="500" placeholder="What's on your mind?" aria-label="Your note" required></textarea>
+      <button type="submit">Post note</button>
+      <p class="error" id="error" role="alert"></p>
+    </form>
+    <section class="notes" id="notes" aria-live="polite"></section>
+  </main>
+  <script>
+    const notesEl = document.getElementById("notes");
+    const form = document.getElementById("noteForm");
+    const errorEl = document.getElementById("error");
+
+    function render(notes) {
+      if (!notes.length) {
+        notesEl.innerHTML = '<p class="lead">No notes yet. Be the first.</p>';
+        return;
+      }
+      notesEl.replaceChildren(...notes.map((note) => {
+        const card = document.createElement("article");
+        card.className = "note";
+        const text = document.createElement("p");
+        text.textContent = note.text;
+        const meta = document.createElement("small");
+        meta.textContent = note.name + " · " + new Date(note.at).toLocaleString();
+        card.append(text, meta);
+        return card;
+      }));
+    }
+
+    async function load() {
+      const res = await fetch("/api/notes");
+      render(await res.json());
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      errorEl.textContent = "";
+      const body = Object.fromEntries(new FormData(form));
+      const res = await fetch("/api/notes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        errorEl.textContent = (await res.json()).error || "That didn't work. Try again.";
+        return;
+      }
+      form.reset();
+      load();
+    });
+
+    load();
+  </script>
+</body>
+</html>

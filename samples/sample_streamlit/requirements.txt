@@ -1,0 +1,2 @@
+# Streamlit brings pandas, numpy, altair and pydeck with it
+streamlit>=1.50,<2

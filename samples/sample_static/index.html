@@ -1,0 +1,62 @@
+<!doctype html>
+<!--
+  A static website: HTML, CSS and JavaScript files, served as they are. No server code runs.
+  - Pages: index.html is the home page, about.html opens at /about, and 404.html is shown for
+    addresses that don't exist.
+  - Change the text here, the look in styles.css, and the menu and opening hours in app.js.
+  To publish a Vite, React or Vue project instead, upload it with its package.json: Cloudilio
+  runs its build and serves the result.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Harbor Coffee</title>
+    <meta name="description" content="Coffee, pastries and a quiet table by the harbor.">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/">Harbor Coffee</a>
+        <nav>
+            <a href="/#menu">Menu</a>
+            <a href="/#hours">Hours</a>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="eyebrow">Open daily by the harbor</p>
+            <h1>Good coffee, slow mornings.</h1>
+            <p class="lead">Beans roasted down the street, pastries baked before sunrise and a window seat with a view of the boats.</p>
+            <div class="hero-actions">
+                <a class="button" href="#menu">See the menu</a>
+                <span id="openBadge" class="badge" aria-live="polite"></span>
+            </div>
+        </section>
+
+        <section id="menu" class="panel">
+            <h2>Menu</h2>
+            <div class="filters" role="group" aria-label="Filter the menu">
+                <button type="button" class="filter is-active" data-filter="all">All</button>
+                <button type="button" class="filter" data-filter="coffee">Coffee</button>
+                <button type="button" class="filter" data-filter="tea">Tea</button>
+                <button type="button" class="filter" data-filter="bakery">Bakery</button>
+            </div>
+            <ul id="menuList" class="menu"></ul>
+        </section>
+
+        <section id="hours" class="panel">
+            <h2>Opening hours</h2>
+            <dl id="hoursList" class="hours"></dl>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>12 Quay Street &middot; hello@harbor.example</p>
+    </footer>
+
+    <script src="/app.js"></script>
+</body>
+</html>
