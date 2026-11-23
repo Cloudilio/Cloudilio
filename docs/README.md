@@ -5,6 +5,7 @@ Guides for putting your app online with Cloudilio, exported from [https://cloudi
 - [Quickstart](quickstart.md): Create an app from a template, a .zip, GitHub or the AI builder, and publish it.
 - [Build, fix and deploy with AI](ai.md): Deploy with AI (drop files and the AI publishes them), building from a description, Fix with AI, Cloudilio credits and using your own ChatGPT or Claude key.
 - [Build with Claude](claude.md): Connect Claude to Cloudilio (the MCP connector at /mcp) and build apps from a chat.
+- [Deploy from GitHub](github.md): Linking a public or private repository, publishing on every push, branch previews and common deploy errors.
 - [Python apps](python.md): Flask, Django, FastAPI, Streamlit and scripts: detection, start commands, Python versions.
 - [Node.js apps](nodejs.md): Express, Next.js and other Node.js servers: start scripts, lock files, Node.js versions.
 - [Your own Dockerfile](dockerfile.md): Any other language: what the node enforces and what a Dockerfile can't do.

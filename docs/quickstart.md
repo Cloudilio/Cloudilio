@@ -64,7 +64,7 @@ Sign in and press **New app**. If you're bringing code, choose one of these:
 |---|---|---|
 | Source ZIP Upload | Upload a .zip of your project, up to 2 GB. It starts uploading as soon as you choose or drop it, with a progress bar, so pressing Create and publish doesn't wait for it. | Instant deployments and local testing. |
 | Built-In Starters | Start from a working template: Flask, Django, FastAPI, Streamlit, Express, a React app, a static website, a Go app and more. | New projects and proof of concepts. |
-| GitHub Repository | Link a public or private GitHub repository branch. | Continuous delivery and team workflows. |
+| GitHub Repository | Link a public or private GitHub repository branch. See [Deploy from GitHub](github.md). | Continuous delivery and team workflows. |
 
 ## Step 3. Deploy and Inspect Runtime Output
 
